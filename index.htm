@@ -111,6 +111,30 @@
             return text[Math.floor(Math.random() * text.length)];
         }
 
+        function rainAtPosition(x, y) {
+            let cloud = document.querySelector('.cloud');
+            let drop = document.createElement('div');
+            drop.classList.add('drop');
+            cloud.appendChild(drop);
+
+            let size = 0.8 + Math.random() * 1.2;  // Farklı boyutlar
+            let duration = 1 + Math.random() * 3;  // Farklı hızlar
+            let delay = Math.random() * 2;         // Rastgele gecikme
+
+            drop.innerText = randomText();
+            drop.style.left = x + 'px';
+            drop.style.top = y + 'px';
+            drop.style.fontSize = size + 'em';
+            drop.style.animationDuration = duration + 's';
+            drop.style.animationDelay = delay + 's';
+
+            // Damlalar ekrandan çıktığında kaldır
+            setTimeout(function () {
+                drop.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // Her yerde rastgele harflerin yağması
         function rain() {
             let cloud = document.querySelector('.cloud');
             let drop = document.createElement('div');
@@ -133,7 +157,13 @@
             }, (duration + delay) * 1000);
         }
 
+        // Her 100ms'de bir harf düşür
         setInterval(rain, 100);
+
+        // İmlecin geçtiği yerlerden harfler yağsın
+        document.addEventListener('mousemove', function (e) {
+            rainAtPosition(e.clientX, e.clientY);
+        });
     </script>
 </body>
 </html>
