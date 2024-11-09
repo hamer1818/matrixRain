@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrix Rain</title>
+    <title>Old Turkic Matrix Rain</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+        @font-face {
+            font-family: 'OldTurkic';
+            src: url('old-turkic.ttf') format('truetype');
+        }
 
         body {
             margin: 0;
             background: #0d0d0d;
             overflow: hidden;
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'OldTurkic', monospace;
         }
 
         .container {
@@ -30,6 +33,7 @@
         }
 
         .container h2 {
+            font-family: 'OldTurkic', monospace;
             position: absolute;
             top: 20px;
             left: 50%;
@@ -45,6 +49,7 @@
         }
 
         .drop {
+            font-family: 'OldTurkic', monospace;
             position: absolute;
             top: 0;
             color: #00ff00;
@@ -94,7 +99,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Matrix Rain</h2>
+        <h2>Old Turkic Matrix Rain</h2>
         <div class="cloud"></div>
     </div>
 
@@ -107,8 +112,11 @@
 
     <script>
         function randomText() {
-            var text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-            return text[Math.floor(Math.random() * text.length)];
+            // Old Turkic Unicode range: 0x10C00 to 0x10C48
+            const start = 0x10C00;
+            const end = 0x10C48;
+            const codePoint = Math.floor(Math.random() * (end - start + 1)) + start;
+            return String.fromCodePoint(codePoint);
         }
 
         function rainAtPosition(x, y) {
